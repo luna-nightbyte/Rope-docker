@@ -1,0 +1,34 @@
+services:
+  base: 
+    image:  docker.io/lunanightbyte/rope-swap:base
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.base  
+  Rope:
+    container_name: Rope-faceswapper
+    image: docker.io/lunanightbyte/rope-swap:v0.0.1
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.run  
+    environment:
+      - DISPLAY=:0
+    volumes:
+    # Change according to your setup
+      - ./output:/app/output
+      - ./sources:/app/sources
+      - ./targets:/app/targets
+
+      # - ./models:/app/models
+      # Display
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    tty: true
+    privileged: true # Need for webcam
+    runtime: nvidia
+    command: [ "/bin/bash", "/app/run.sh" ]
