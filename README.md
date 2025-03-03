@@ -1,6 +1,22 @@
 ![image](https://github.com/Hillobar/Rope/assets/63615199/40f7397f-713c-4813-ac86-bab36f6bd5ba)
 
+### Docker usage
 
+The docker images can be built locally, or pulled from the [hub](https://hub.docker.com/repository/docker/lunanightbyte/rope-swap/general). My images on the hub contains pre-installed python enviroment and pre downloded all models. 
+Only include the models folder in the volume [section](https://github.com/luna-nightbyte/Rope-docker/blob/cb8b470931bef12186553b20f57f90756987f993/docker-compose.yml#L21) if you have custom models you want to use.
+
+Otherwise just run with the default setup while adding your files in the input/output folders [section](https://github.com/luna-nightbyte/Rope-docker/blob/cb8b470931bef12186553b20f57f90756987f993/docker-compose.yml#L17-L19).
+#### Build (optional)
+```
+make build docker
+```
+
+#### Run
+```
+docker compose up -d Rope
+```
+
+###
 Rope implements the insightface inswapper_128 model with a helpful GUI.
 ### [Discord](https://discord.gg/EcdVAFJzqp)
 
